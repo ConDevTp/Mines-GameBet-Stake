@@ -1,0 +1,255 @@
+<html>
+  <head>
+    <title>Mines</title>
+    <meta charset="utf-8" />
+    <meta
+      content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
+      name="viewport"
+    />
+    <meta content="index, follow" name="robots" />
+    <meta charset="utf-8" />
+    <meta content="yes" name="mobile-web-app-capable" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="" name="apple-mobile-web-app-title" />
+    <meta content="website" name="og:type" property="og:type" />
+    <meta content="" name="og:title" property="og:title" />
+    <meta content="Mines" name="og:site_name" property="og:site_name" />
+    <meta content="" name="og:description" property="og:description" />
+    <meta content="en_US" property="og:locale" />
+    <meta content="" name="description" />
+    <link content="" property="og:image" />
+    <link content=image/png property=og:image:type>
+    <link content="512" property="og:image:width" />
+    <link content="512" property="og:image:height" />
+    <link href=/apple-touch-icon.png rel=icon type=image/x-icon><link
+    href=/apple-touch-icon.png rel=apple-touch-icon sizes=180x180><link
+    href=/favicon-48x48.png rel=icon sizes=48x48 type=image/png><link
+    href=/favicon-32x32.png rel=icon sizes=32x32 type=image/png><link
+    href=/favicon-16x16.png rel=icon sizes=16x16 type=image/png>
+    <meta content="#1a2c38" name="theme-color" />
+    <link rel="stylesheet" href="./assets/css/bootstrap/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="./assets/font/fontawesome-free-5.15.4-web/css/all.min.css"
+    />
+    <link href="./assets/css/index.css" rel="stylesheet" />
+  </head>
+  <body class="d-flex">
+    <!-- History Sidebar -->
+    <div class="history m-hide" id="m-con-history">
+      <div class="d-flex justify-content-between align-items-center d-lg-none">
+        <h3>History</h3>
+        <i
+          class="fa fa-window-close coloseIconHistory"
+          onclick="HideHistory()"
+        ></i>
+      </div>
+      <h3 class="d-none d-lg-flex">History</h3>
+      <div id="historyList">
+        <div id="empty-history" class="empty-history">Empty History</div>
+      </div>
+    </div>
+
+    <section class="m-con">
+      <div id="wrap" class="h-100">
+        <div id="app" class="h-100">
+          <div class="container h-100">
+            <form class="game-wrapper responsive" id="mines-form">
+              <div class="content-wrapper">
+                <div class="page-content" id="main-content">
+                  <div class="game-inner-wrapper">
+                    <div
+                      class="game-content house d-flex flex-column-reverse flex-lg-row-reverse"
+                    >
+                      <div class="bet-side config">
+                        <div class="mb-3">
+                          <label
+                            class="d-flex justify-content-between align-items-sm-center m-blance"
+                            >Balance:
+                            <div>$<span id="balance">1000.00</span></div></label
+                          >
+                        </div>
+                        <div class="form-group risk">
+                          <label class="form-label" for="risk"
+                            >Bet Amount</label
+                          >
+                          <div class="p-relative d-flex form-buttons">
+                            <div class="group">
+                              <div class="p-relative">
+                                <input
+                                  id="risk"
+                                  type="number"
+                                  value="10"
+                                  name="risk"
+                                  inputmode="numeric"
+                                  min="0"
+                                  step="0.1"
+                                />
+                                <div class="after-icon">
+                                  <svg
+                                    viewBox="0 0 96 96"
+                                    class="svg-icon"
+                                    fill="none"
+                                  >
+                                    <title></title>
+                                    <path
+                                      d="M96 48c0 26.51-21.49 48-48 48S0 74.51 0 48 21.49 0 48 0s48 21.49 48 48Z"
+                                      fill="#26A17B"
+                                    ></path>
+                                    <path
+                                      d="M53.766 52.149v-.006c-.33.024-2.031.126-5.826.126-3.03 0-5.163-.09-5.913-.126v.009c-11.664-.513-20.37-2.544-20.37-4.974 0-2.427 8.706-4.458 20.37-4.98v7.932c.762.054 2.946.183 5.964.183 3.62 0 5.436-.15 5.775-.18v-7.929c11.64.519 20.325 2.55 20.325 4.974 0 2.43-8.685 4.455-20.325 4.971Zm0-10.77v-7.098h16.242V23.457H25.785v10.824h16.242v7.095c-13.2.606-23.127 3.222-23.127 6.354s9.927 5.745 23.127 6.354V76.83h11.739V54.078c13.179-.606 23.082-3.219 23.082-6.348s-9.903-5.742-23.082-6.351Z"
+                                      fill="#fff"
+                                    ></path>
+                                  </svg>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="group-btn">
+                              <button type="button" id="half">½</button>
+                            </div>
+                            <div class="group-btn">
+                              <button type="button" id="twox">2×</button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="flip-btn" id="not-ingame">
+                          <div class="form-group" id="not-ingame">
+                            <label class="form-label">Mines</label>
+                            <div class="p-relative">
+                              <select id="mines_select" name="mines"></select>
+                            </div>
+                          </div>
+                          <button
+                            type="submit"
+                            class="button popup-submit submit-mines"
+                          >
+                            Bet
+                          </button>
+                        </div>
+                        <div class="hidden" id="ingame">
+                          <div class="flip-btn">
+                            <div>
+                              <div class="d-flex g-2">
+                                <div class="form-group">
+                                  <label class="form-label">Mines</label>
+                                  <input
+                                    id="mines"
+                                    type="number"
+                                    value="1"
+                                    name="mines"
+                                    readonly
+                                  />
+                                </div>
+                                <div class="form-group">
+                                  <label class="form-label">Gems</label>
+                                  <input
+                                    id="gems"
+                                    type="number"
+                                    value="25"
+                                    disabled
+                                  />
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="form-label d-flex g-0-5"
+                                  >Profit on Win
+                                  <span data-multiplier
+                                    >(<span>1</span>x)</span
+                                  ></label
+                                >
+                                <div class="p-relative">
+                                  <input id="profit" disabled />
+                                  <div class="after-icon">
+                                    <svg
+                                      viewBox="0 0 96 96"
+                                      class="svg-icon"
+                                      fill="none"
+                                    >
+                                      <title></title>
+                                      <path
+                                        d="M96 48c0 26.51-21.49 48-48 48S0 74.51 0 48 21.49 0 48 0s48 21.49 48 48Z"
+                                        fill="#26A17B"
+                                      ></path>
+                                      <path
+                                        d="M53.766 52.149v-.006c-.33.024-2.031.126-5.826.126-3.03 0-5.163-.09-5.913-.126v.009c-11.664-.513-20.37-2.544-20.37-4.974 0-2.427 8.706-4.458 20.37-4.98v7.932c.762.054 2.946.183 5.964.183 3.62 0 5.436-.15 5.775-.18v-7.929c11.64.519 20.325 2.55 20.325 4.974 0 2.43-8.685 4.455-20.325 4.971Zm0-10.77v-7.098h16.242V23.457H25.785v10.824h16.242v7.095c-13.2.606-23.127 3.222-23.127 6.354s9.927 5.745 23.127 6.354V76.83h11.739V54.078c13.179-.606 23.082-3.219 23.082-6.348s-9.903-5.742-23.082-6.351Z"
+                                        fill="#fff"
+                                      ></path>
+                                    </svg>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div>
+                              <button
+                                type="submit"
+                                class="button popup-submit submit-mines cashout"
+                              >
+                                Cashout
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="game-side">
+                        <div class="center mt-3 mt-lg-0">
+                          <div class="recent" id="recent"></div>
+                          <div class="grid" id="grid"></div>
+                        </div>
+                        <div class="game-wrap">
+                          <div class="mines-wrap" id="minesWrap"></div>
+                          <audio class="win-sound">
+                            <source src=assets/images/win.mp3?1 type=audio/mpeg></audio
+                          ><audio class="mine-sound">
+                            <source src=assets/images/mine.mp3?1
+                            type=audio/mpeg>
+                          </audio>
+                          <audio class="gem2-sound">
+                            <source src=assets/images/gem2.mp3?1
+                            type=audio/mpeg></audio
+                          ><audio class="gem1-sound">
+                            <source src=assets/images/gem1.mp3?1
+                            type=audio/mpeg>
+                          </audio>
+                          <audio class="gem-sound">
+                            <source src=assets/images/gem0.mp3?1
+                            type=audio/mpeg>
+                          </audio>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- <button
+      onclick="autoPlayUntilLastGem()"
+      style="
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        z-index: 1000;
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        z-index: 1000;
+        background: #fff;
+        padding: 5px;
+        color: red;
+      "
+    >
+   Auto Play
+    </button> -->
+    <!-- Btn History -->
+    <button onclick="ShowHistory()" class="d-lg-none openIconHistory">
+      <i class="fa fa-history"></i>
+    </button>
+
+    <script src="./assets/js/index.js"></script>
+  </body>
+</html>

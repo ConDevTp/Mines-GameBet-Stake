@@ -120,10 +120,11 @@ git clone https://github.com/ConDevTp/Mines-GameBet-Stake.git
 cd Mines-GameBet-Stake
 open index.html
 ```
+## 📄 License
 <br/>
 <div align="center">
 
-📄 License
-<br/>
-<strong> MIT © ConDev </strong> 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge&logo=appveyor&logoColor=white)](https://opensource.org/licenses/MIT)  
+**© ConDev** – All rights reserved.  
+
 </div>
